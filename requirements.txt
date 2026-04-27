@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+streamlit
+langgraph
+langchain-aws
+chromadb
+python-dotenv
