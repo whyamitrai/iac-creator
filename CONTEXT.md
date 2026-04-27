@@ -13,10 +13,10 @@
 ## LIVE STATE
 
 ```
-Last Updated     : 2026-04-27
-Current Step     : Step 2 — RAG Layer (ingest done, retriever next)
-Project Status   : Setup complete, ingest.py written, retriever.py pending
-Next Action      : Create backend/rag/retriever.py (query ChromaDB, return relevant chunks)
+Last Updated     : 2026-04-28
+Current Step     : Step 3 — Agent (LangGraph)
+Project Status   : RAG layer complete (ingest + retriever tested). Agent pending.
+Next Action      : Create backend/agent/graph.py (LangGraph agent with RAG + Bedrock)
 Waiting For      : Next session
 ```
 
@@ -59,7 +59,7 @@ Terraform code generate → user ko dikha
 | Step | What | Status |
 |------|------|--------|
 | 1 | Project setup (requirements, .env, .gitignore, config) | ✅ Done |
-| 2 | RAG layer (documents, ingest, retriever) | 🔄 In Progress (ingest done) |
+| 2 | RAG layer (documents, ingest, retriever) | ✅ Done |
 | 3 | Agent (LangGraph — conversation + RAG + code generation) | Pending |
 | 4 | FastAPI (endpoints exposing agent) | Pending |
 | 5 | Streamlit (UI connecting to FastAPI) | Pending |
@@ -123,6 +123,7 @@ iac-creator/
 | Date | What Happened |
 |------|--------------|
 | Apr 27 | Project initialized. Tech stack decided. Setup complete (requirements, .env, .gitignore, config). ingest.py written (DirectoryLoader → TextSplitter → ChromaDB). Sample terraform doc created. |
+| Apr 28 | RAG layer complete. config.py refactored (paths centralized). ingest.py updated (TextLoader, langchain-huggingface). retriever.py written (Chroma load + similarity_search). End-to-end test passed. Dependencies fixed (langchain-community, langchain-text-splitters, langchain-huggingface, sentence-transformers). |
 
 ## How To Resume On Any Device
 

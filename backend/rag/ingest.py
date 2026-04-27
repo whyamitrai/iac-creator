@@ -1,15 +1,11 @@
-from langchain_community.document_loaders import DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma 
-from langchain_community.embeddings import HuggingFaceEmbeddings
-import os
-
-BASE_DIR =  os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-DATA_DIR = os.path.join(BASE_DIR, "kb_data", "terraform_docs")
-CHROMA_DIR = os.path.join(BASE_DIR, "chroma_db")
+from langchain_huggingface import HuggingFaceEmbeddings
+from backend.config import DATA_DIR, CHROMA_DIR 
 
 def ingest():
-    loader = DirectoryLoader(DATA_DIR)
+    loader = DirectoryLoader(DATA_DIR, glob = "**/*.md", loader_cls = TextLoader)
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size = 500, chunk_overlap = 50)
     chunks = splitter.split_documents(docs)
