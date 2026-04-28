@@ -15,8 +15,8 @@
 ```
 Last Updated     : 2026-04-28
 Current Step     : Step 3 — Agent (LangGraph)
-Project Status   : RAG layer complete (ingest + retriever tested). Agent pending.
-Next Action      : Create backend/agent/graph.py (LangGraph agent with RAG + Bedrock)
+Project Status   : graph.py written (State + RAG node + Generate node + graph compiled). Untested.
+Next Action      : Test graph.py end-to-end (AWS creds + pip install check + sample query). Then Step 4 — FastAPI.
 Waiting For      : Next session
 ```
 
@@ -124,6 +124,7 @@ iac-creator/
 |------|--------------|
 | Apr 27 | Project initialized. Tech stack decided. Setup complete (requirements, .env, .gitignore, config). ingest.py written (DirectoryLoader → TextSplitter → ChromaDB). Sample terraform doc created. |
 | Apr 28 | RAG layer complete. config.py refactored (paths centralized). ingest.py updated (TextLoader, langchain-huggingface). retriever.py written (Chroma load + similarity_search). End-to-end test passed. Dependencies fixed (langchain-community, langchain-text-splitters, langchain-huggingface, sentence-transformers). |
+| Apr 28 | Agent graph.py written. State (TypedDict: query, context, output). RAG node (retrieve → context). Generate node (ChatBedrock + prompt + .content). Graph: entry→knowledgebase→generator→finish. Compiled. Learned: TypedDict, node returns dict for state merge, .content for LLM response, doc.page_content for Document objects, join for list→string, StateGraph init. Untested — next session. |
 
 ## How To Resume On Any Device
 
