@@ -13,10 +13,10 @@
 ## LIVE STATE
 
 ```
-Last Updated     : 2026-04-28
-Current Step     : Step 3 — Agent (LangGraph)
-Project Status   : graph.py written (State + RAG node + Generate node + graph compiled). Untested.
-Next Action      : Test graph.py end-to-end (AWS creds + pip install check + sample query). Then Step 4 — FastAPI.
+Last Updated     : 2026-05-02
+Current Step     : Step 3 — Agent (LangGraph) ✅ COMPLETE
+Project Status   : graph.py tested end-to-end. Switched from Bedrock to Ollama (llama3.2). Full pipeline working: query → RAG → LLM → Terraform code.
+Next Action      : Step 4 — FastAPI (endpoints exposing agent)
 Waiting For      : Next session
 ```
 
@@ -32,7 +32,7 @@ Waiting For      : Next session
 | Frontend | Streamlit |
 | Backend API | FastAPI + Uvicorn |
 | Agent | LangGraph |
-| LLM | AWS Bedrock (Claude) |
+| LLM | Ollama (llama3.2, local) — switchable to Bedrock later |
 | RAG Vector DB | ChromaDB (local) |
 | Embeddings | HuggingFace (all-MiniLM-L6-v2, local) |
 | RAG Documents | Terraform best practices, naming conventions, module structures |
@@ -40,7 +40,7 @@ Waiting For      : Next session
 ## Architecture
 
 ```
-User (Streamlit) → FastAPI Backend → LangGraph Agent → Bedrock (Claude)
+User (Streamlit) → FastAPI Backend → LangGraph Agent → Ollama (llama3.2)
                                           ↓
                                     ChromaDB (RAG)
                                   (Terraform best practices)
@@ -60,7 +60,7 @@ Terraform code generate → user ko dikha
 |------|------|--------|
 | 1 | Project setup (requirements, .env, .gitignore, config) | ✅ Done |
 | 2 | RAG layer (documents, ingest, retriever) | ✅ Done |
-| 3 | Agent (LangGraph — conversation + RAG + code generation) | Pending |
+| 3 | Agent (LangGraph — conversation + RAG + code generation) | ✅ Done |
 | 4 | FastAPI (endpoints exposing agent) | Pending |
 | 5 | Streamlit (UI connecting to FastAPI) | Pending |
 | 6 | README (professional documentation) | Pending |
@@ -106,7 +106,7 @@ iac-creator/
 1. **Separate repos:** This workspace (prep-repo) is private, iac-creator is public
 2. **FastAPI + Streamlit:** Decoupled frontend/backend (not Streamlit-only) — professional architecture
 3. **Streamlit over React:** User knows Python, React would be vibe-coded. Streamlit = own code
-4. **Bedrock over Ollama:** Resume alignment, production-ready, no local GPU dependency
+4. **Bedrock → Ollama (temporary):** Bedrock requires payment method. Switched to Ollama (llama3.2) for local dev. Architecture supports easy swap back.
 5. **HuggingFace embeddings over Bedrock:** Free, local, no API quota usage for embeddings
 6. **ChromaDB:** Simple, local, free — good for MVP
 
@@ -125,6 +125,7 @@ iac-creator/
 | Apr 27 | Project initialized. Tech stack decided. Setup complete (requirements, .env, .gitignore, config). ingest.py written (DirectoryLoader → TextSplitter → ChromaDB). Sample terraform doc created. |
 | Apr 28 | RAG layer complete. config.py refactored (paths centralized). ingest.py updated (TextLoader, langchain-huggingface). retriever.py written (Chroma load + similarity_search). End-to-end test passed. Dependencies fixed (langchain-community, langchain-text-splitters, langchain-huggingface, sentence-transformers). |
 | Apr 28 | Agent graph.py written. State (TypedDict: query, context, output). RAG node (retrieve → context). Generate node (ChatBedrock + prompt + .content). Graph: entry→knowledgebase→generator→finish. Compiled. Learned: TypedDict, node returns dict for state merge, .content for LLM response, doc.page_content for Document objects, join for list→string, StateGraph init. Untested — next session. |
+| May 2 | Switched LLM from Bedrock to Ollama (llama3.2) — Bedrock needs payment method. Installed Ollama, pulled llama3.2 model. Changed graph.py (ChatBedrock→ChatOllama), config.py (BEDROCK_MODEL→OLLAMA_MODEL, added abspath fix for __file__). Fixed /tmp tmpfs 2.9GB limit (TMPDIR=~/pip_tmp for pip). Set up venv (python -m venv). Installed all deps including GPU torch (GTX 1650). Tested graph end-to-end: query→RAG→Ollama→Terraform code generated successfully. Learned: __pycache__ caching old code, unsaved files in editor vs disk, load_dotenv path resolution, tmpfs vs disk space, MoE vs Dense model architectures. Step 3 COMPLETE. |
 
 ## How To Resume On Any Device
 

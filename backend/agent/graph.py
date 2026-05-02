@@ -1,8 +1,8 @@
 from langgraph.graph import StateGraph
 from typing import TypedDict, List
 from backend.rag.retriever import retrieve
-from langchain_aws import ChatBedrock
-from backend.config import region, model
+from langchain_ollama import ChatOllama
+from backend.config import model
 
 
 class IacState(TypedDict):
@@ -18,7 +18,7 @@ def callRag(state):
     return {"context": retrieved_data}
 
 def generate(state):
-    llm = ChatBedrock(region_name = region, model_id = model)
+    llm = ChatOllama(model = model)
     query = state["query"]
     context = state["context"]
     context_text = "\n".join([doc.page_content for doc in context])
