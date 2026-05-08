@@ -13,10 +13,10 @@
 ## LIVE STATE
 
 ```
-Last Updated     : 2026-05-02
-Current Step     : Step 3 — Agent (LangGraph) ✅ COMPLETE
-Project Status   : graph.py tested end-to-end. Switched from Bedrock to Ollama (llama3.2). Full pipeline working: query → RAG → LLM → Terraform code.
-Next Action      : Step 4 — FastAPI (endpoints exposing agent)
+Last Updated     : 2026-05-09
+Current Step     : Step 5 — Streamlit ✅ COMPLETE
+Project Status   : Full stack working end-to-end. Streamlit UI → FastAPI → LangGraph → RAG → Ollama → Terraform code displayed in browser.
+Next Action      : Step 6 — README (professional documentation)
 Waiting For      : Next session
 ```
 
@@ -61,8 +61,8 @@ Terraform code generate → user ko dikha
 | 1 | Project setup (requirements, .env, .gitignore, config) | ✅ Done |
 | 2 | RAG layer (documents, ingest, retriever) | ✅ Done |
 | 3 | Agent (LangGraph — conversation + RAG + code generation) | ✅ Done |
-| 4 | FastAPI (endpoints exposing agent) | Pending |
-| 5 | Streamlit (UI connecting to FastAPI) | Pending |
+| 4 | FastAPI (endpoints exposing agent) | ✅ Done |
+| 5 | Streamlit (UI connecting to FastAPI) | ✅ Done |
 | 6 | README (professional documentation) | Pending |
 | 7 | Docker + CI/CD (containerize + pipeline) | Pending |
 
