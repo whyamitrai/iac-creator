@@ -124,10 +124,30 @@ iac-creator/
 └── README.md
 ```
 
+## Docker
+
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+```
+
+Services:
+- **App** — `http://localhost:8501` (Streamlit) + `http://localhost:8000` (API)
+- **Ollama** — `http://localhost:11434`
+
+> Note: First run will pull the Ollama image and model (may take a few minutes).
+
+## CI/CD
+
+GitHub Actions pipeline runs on every push/PR to `main`:
+- Python dependency installation
+- Linting with flake8
+- Docker image build verification
+
 ## Roadmap
 
-- [ ] Docker containerization
-- [ ] CI/CD pipeline
+- [x] Docker containerization
+- [x] CI/CD pipeline
 - [ ] Swap to AWS Bedrock (Claude) for production LLM
 - [ ] Multi-turn conversation support
 - [ ] Terraform plan validation

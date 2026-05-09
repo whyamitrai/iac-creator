@@ -14,10 +14,10 @@
 
 ```
 Last Updated     : 2026-05-10
-Current Step     : Step 6 — README ✅ COMPLETE
-Project Status   : Full stack working + professional README documented.
-Next Action      : Step 7 — Docker + CI/CD (containerize + pipeline)
-Waiting For      : Next session
+Current Step     : Step 7 — Docker + CI/CD ✅ COMPLETE
+Project Status   : Full stack working + README + Dockerized + CI/CD pipeline configured.
+Next Action      : Test Docker build locally, push to GitHub to verify CI/CD
+Waiting For      : docker build test / git push
 ```
 
 ## Project Overview
@@ -64,7 +64,7 @@ Terraform code generate → user ko dikha
 | 4 | FastAPI (endpoints exposing agent) | ✅ Done |
 | 5 | Streamlit (UI connecting to FastAPI) | ✅ Done |
 | 6 | README (professional documentation) | ✅ Done |
-| 7 | Docker + CI/CD (containerize + pipeline) | Pending |
+| 7 | Docker + CI/CD (containerize + pipeline) | ✅ Done |
 
 ## Repo Structure
 
@@ -127,6 +127,7 @@ iac-creator/
 | Apr 28 | Agent graph.py written. State (TypedDict: query, context, output). RAG node (retrieve → context). Generate node (ChatBedrock + prompt + .content). Graph: entry→knowledgebase→generator→finish. Compiled. Learned: TypedDict, node returns dict for state merge, .content for LLM response, doc.page_content for Document objects, join for list→string, StateGraph init. Untested — next session. |
 | May 2 | Switched LLM from Bedrock to Ollama (llama3.2) — Bedrock needs payment method. Installed Ollama, pulled llama3.2 model. Changed graph.py (ChatBedrock→ChatOllama), config.py (BEDROCK_MODEL→OLLAMA_MODEL, added abspath fix for __file__). Fixed /tmp tmpfs 2.9GB limit (TMPDIR=~/pip_tmp for pip). Set up venv (python -m venv). Installed all deps including GPU torch (GTX 1650). Tested graph end-to-end: query→RAG→Ollama→Terraform code generated successfully. Learned: __pycache__ caching old code, unsaved files in editor vs disk, load_dotenv path resolution, tmpfs vs disk space, MoE vs Dense model architectures. Step 3 COMPLETE. |
 | May 10 | README written. Sections: title, architecture diagram, tech stack table, features, prerequisites, setup (8 steps with bash blocks), usage with example prompt, project structure (tree format), roadmap (checkboxes). Formatting fixed (code blocks, typos). Step 6 COMPLETE. |
+| May 10 | Docker + CI/CD done. Dockerfile (python:3.11-slim, layer caching, dual service CMD). docker-compose.yml (app + ollama services, named volume, depends_on). .dockerignore (venv, chroma_db, .env, .git). GitHub Actions ci.yml (checkout, setup-python, pip install, flake8 lint, docker build). README updated with Docker/CI sections. Step 7 COMPLETE. |
 
 ## How To Resume On Any Device
 
