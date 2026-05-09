@@ -14,10 +14,10 @@
 
 ```
 Last Updated     : 2026-05-10
-Current Step     : Step 7 — Docker + CI/CD ✅ COMPLETE
-Project Status   : Full stack working + README + Dockerized + CI/CD pipeline configured.
-Next Action      : Test Docker build locally, push to GitHub to verify CI/CD
-Waiting For      : docker build test / git push
+Current Step     : Step 7 — Docker + CI/CD ✅ COMPLETE (FULLY TESTED)
+Project Status   : Full stack working + README + Dockerized + CI/CD green + Docker compose tested end-to-end.
+Next Action      : Project complete. Optional: CD setup, prompt engineering, more RAG docs.
+Waiting For      : Next session (if any enhancements needed)
 ```
 
 ## Project Overview
@@ -128,6 +128,7 @@ iac-creator/
 | May 2 | Switched LLM from Bedrock to Ollama (llama3.2) — Bedrock needs payment method. Installed Ollama, pulled llama3.2 model. Changed graph.py (ChatBedrock→ChatOllama), config.py (BEDROCK_MODEL→OLLAMA_MODEL, added abspath fix for __file__). Fixed /tmp tmpfs 2.9GB limit (TMPDIR=~/pip_tmp for pip). Set up venv (python -m venv). Installed all deps including GPU torch (GTX 1650). Tested graph end-to-end: query→RAG→Ollama→Terraform code generated successfully. Learned: __pycache__ caching old code, unsaved files in editor vs disk, load_dotenv path resolution, tmpfs vs disk space, MoE vs Dense model architectures. Step 3 COMPLETE. |
 | May 10 | README written. Sections: title, architecture diagram, tech stack table, features, prerequisites, setup (8 steps with bash blocks), usage with example prompt, project structure (tree format), roadmap (checkboxes). Formatting fixed (code blocks, typos). Step 6 COMPLETE. |
 | May 10 | Docker + CI/CD done. Dockerfile (python:3.11-slim, layer caching, dual service CMD). docker-compose.yml (app + ollama services, named volume, depends_on). .dockerignore (venv, chroma_db, .env, .git). GitHub Actions ci.yml (checkout, setup-python, pip install, flake8 lint, docker build). README updated with Docker/CI sections. Step 7 COMPLETE. |
+| May 10 | PEP8 fixes (all files). CI green. Docker installed on Arch (kernel reboot needed for nf_tables). Docker build tested locally. docker-compose up tested — full stack running in containers (Ollama model mounted from host). OLLAMA_BASE_URL made configurable for Docker networking. CD concept discussed. PROJECT MVP COMPLETE. |
 
 ## How To Resume On Any Device
 
