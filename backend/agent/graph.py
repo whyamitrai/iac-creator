@@ -2,7 +2,7 @@ from langgraph.graph import StateGraph
 from typing import TypedDict, List
 from backend.rag.retriever import retrieve
 from langchain_ollama import ChatOllama
-from backend.config import model
+from backend.config import model, ollama_base_url
 
 
 class IacState(TypedDict):
@@ -21,7 +21,7 @@ def callRag(state):
 
 
 def generate(state):
-    llm = ChatOllama(model=model)
+    llm = ChatOllama(model=model, base_url=ollama_base_url)
     query = state["query"]
     context = state["context"]
     context_text = "\n".join([doc.page_content for doc in context])
