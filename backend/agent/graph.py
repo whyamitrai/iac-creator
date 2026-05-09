@@ -10,21 +10,25 @@ class IacState(TypedDict):
     context: List
     output: str
 
+
 graph = StateGraph(IacState)
+
 
 def callRag(state):
     query = state["query"]
     retrieved_data = retrieve(query)
     return {"context": retrieved_data}
 
+
 def generate(state):
-    llm = ChatOllama(model = model)
+    llm = ChatOllama(model=model)
     query = state["query"]
     context = state["context"]
     context_text = "\n".join([doc.page_content for doc in context])
     prompt_text = f"You are a terraform expert use this context:  {context_text} and user asked for this: {query}"
     generated_code = llm.invoke(prompt_text).content
     return {"output": generated_code}
+
 
 graph.add_node("knowledgebase", callRag)
 graph.add_node("generator", generate)
