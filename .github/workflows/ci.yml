@@ -3,8 +3,12 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '*.md'
+      - 'CONTEXT.md'
+      - 'MY_LEARNING.md'
   pull_request:
-    brances: [main]
+    branches: [main]
 
 jobs:
   build:
