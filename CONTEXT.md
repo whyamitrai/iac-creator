@@ -13,17 +13,18 @@
 ## LIVE STATE
 
 ```
-Last Updated     : 2026-05-10
-Current Step     : Step 7 — Docker + CI/CD ✅ COMPLETE (FULLY TESTED)
-Project Status   : Full stack working + README + Dockerized + CI/CD green + Docker compose tested end-to-end.
-Next Action      : Project complete. Optional: CD setup, prompt engineering, more RAG docs.
-Waiting For      : Next session (if any enhancements needed)
+Last Updated     : 2026-08-05
+Current Step     : Phase 2 baseline-ownership gate
+Project Status   : MVP works: Streamlit → FastAPI → two-node LangGraph → Chroma → Ollama; Docker/CI lint-build path exists.
+Demonstrated Gap : No behavioral test suite, persistence, queue, evaluation, production observability, or deployed AWS path yet.
+Next Action      : Independently run the system, map request/response flow, explain each existing function, and list five failure paths.
+Scope Guardrail  : Follow `../prep/career/career-blueprint/AI_ENGINEER_BLUEPRINT.md`. Do not start the retired diagram/multi-agent rebuild without measured need.
 ```
 
 ## Project Overview
 
-**What:** AI-powered IaC (Infrastructure as Code) generator using RAG + Terraform best practices
-**How:** User describes infra needs → Agent discusses/clarifies → RAG fetches best practices → Generates Terraform code
+**What:** Local RAG-assisted Terraform code-generation demo.
+**Current behavior:** User submits one text request → FastAPI invokes a two-node LangGraph → Chroma retrieves three documents → Ollama generates Terraform text → response returns to Streamlit.
 
 ## Tech Stack
 
@@ -31,28 +32,23 @@ Waiting For      : Next session (if any enhancements needed)
 |-----------|-----------|
 | Frontend | Streamlit |
 | Backend API | FastAPI + Uvicorn |
-| Agent | LangGraph |
-| LLM | Ollama (llama3.2, local) — switchable to Bedrock later |
+| Workflow | LangGraph (two sequential nodes) |
+| LLM | Ollama (`llama3.2`, local) |
 | RAG Vector DB | ChromaDB (local) |
-| Embeddings | HuggingFace (all-MiniLM-L6-v2, local) |
-| RAG Documents | Terraform best practices, naming conventions, module structures |
+| Embeddings | HuggingFace (`all-MiniLM-L6-v2`, local) |
+| RAG Documents | Current sample Terraform naming/best-practice content |
 
 ## Architecture
 
 ```
-User (Streamlit) → FastAPI Backend → LangGraph Agent → Ollama (llama3.2)
-                                          ↓
-                                    ChromaDB (RAG)
-                                  (Terraform best practices)
+User → Streamlit → POST /generate → FastAPI → retrieve(k=3) → Ollama → text response
+                                               ↓
+                                            ChromaDB
 ```
 
-## MVP Flow
+## Current Flow and Limits
 
-```
-User prompt → Agent (LangGraph) → clarifying questions →
-user answers → Agent generates plan → RAG se best practices fetch →
-Terraform code generate → user ko dikha
-```
+The current graph retrieves context and generates text. It does not yet ask clarifying questions, maintain a conversation, parse/validate Terraform, persist jobs, run evaluations, provide production observability, or call Bedrock.
 
 ## Build Order
 
